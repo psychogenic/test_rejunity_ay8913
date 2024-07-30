@@ -13,30 +13,10 @@ log = logging.getLogger(__name__)
 from examples.tt_um_rejunity_ay8913.psym_reader import PsYMReader
 from examples.tt_um_rejunity_ay8913.ay8913 import AY8913
 from examples.tt_um_rejunity_ay8913.ay8913PIO import AY8913PIO
+from examples.tt_um_rejunity_ay8913.setup import setup
 import ttboard.util.time as time 
-import ttboard.util.platform as platform
+
 DefaultFile = '/drwho.psym'
-
-def setup(tt:DemoBoard):
-    
-    if tt.shuttle.run != 'tt05':
-        print(f" ay8913isn't actually on shuttle {tt.shuttle.run}, sorry!")
-        return False
-    
-    print("Selecting ay8913 project")
-    tt.shuttle.tt_um_rejunity_ay8913.enable()
-
-    
-    tt.reset_project(True)
-    #tt.clock_project_PWM(1.79e6)
-    platform.set_RP_system_clock(126e6)
-    tt.clock_project_PWM(2e6)
-
-    tt.reset_project(False)
-    
-    return True
-
-
 def runPurePython(file_to_play:str=DefaultFile):
     tt = DemoBoard.get()
     if not setup(tt):

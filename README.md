@@ -6,6 +6,10 @@ This will let you either play with the AY8913 interface directly or just call fu
 
 NOTE: this all assumes you're running a TT demoboard, with [the SDK](https://github.com/TinyTapeout/tt-micropython-firmware/) installed.
 
+## 
+Installation basically involves copying over the `tt_um_rejunity_ay8913` directory onto the micropython FS under `examples/`.
+
+
 ## Play tunes
 
 You'll need a file, such as that found in samples/ here, of the right format or to figure out how to get the register values to set for each time tick on your own.
@@ -29,5 +33,19 @@ There are two implementations of the API -- a pure python and a PIO-based.  The 
     set_register(regid, value)
 ```
 
-method that does the right thing.  For more, use the source.
+method that does the right thing.  
+
+
+There's also a way to just send over a list of registers to set, per sample, e.g.
+```
+      Data = [
+              [(0,0),(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,255),(8,0),(9,0),(10,0),(11,0),(12,0),(13,0),(14,0),(15,0)]
+              [(4,255),(7,251),(10,8),(13,15)]
+              [(0,214),(7,250),(8,9)],
+              # ...
+      ]
+```
+Then, `tt_um_rejunity_ay8913.play_array` has a `run(data_list, sample_rate:int=50)` you may call to feed in each list of registers at the right beat.
+
+For more, use the source.
 
