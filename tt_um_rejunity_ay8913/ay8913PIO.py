@@ -38,35 +38,17 @@ log = logging.getLogger(__name__)
              sideset_init=(PIO.OUT_LOW,)*2,
              out_init=(PIO.OUT_LOW,)*4 + (PIO.IN_LOW,)*4 + (PIO.OUT_LOW,)*4)
 def ay8913writer():
-    # this implementation is redundant and sub-optimal
-    # all the nops and duplicate .side() settings are 
-    # probably not required but it was a bit of a pain
-    # to get working, and this does work with a statemachine 
-    # freq of 2MHz... from uPython, I can set registers with 
+    # This does work with a statemachine 
+    # freq of 2MHz... from uPython, we can set registers with 
     # this in about 40us (down from close to 8 milliseconds!)
-    # so I'm good with it for now
+    # any issues, easiest fixes are to just reduce the freq=
+    # in the SM below, see if that resolves things
     out(isr, 8)         .side(0)
     in_(isr, 4)         .side(0b11)
     mov(pins, isr)      .side(0b11)
-    nop().side(0b11)
-    nop().side(0b11)
-    nop().side(0b11)
-    nop().side(0b11)
     out(isr, 8)         .side(0)
-    nop().side(0)
     in_(isr, 4)         .side(0b10)
-    mov(pins, isr)      .side(0b10)
-    nop()
-    nop()
-    nop()
-    nop().side(0)
-    nop().delay(3)
-    nop()
-    nop()
-    nop()
-    nop()
-    nop()
-    nop()
+    mov(pins, isr)      .side(0b10).delay(3)
 
 
 
