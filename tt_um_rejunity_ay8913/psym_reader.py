@@ -5,7 +5,7 @@ Created on Jul 25, 2024
 @copyright: Copyright (C) 2024 Pat Deegan, https://psychogenic.com
 '''
 import struct
-import ttboard.logging as logging
+import ttboard.log as logging
 log = logging.getLogger(__name__)
 from examples.tt_um_rejunity_ay8913.sample import Sample, RegisterValue
 class PsYMReader:

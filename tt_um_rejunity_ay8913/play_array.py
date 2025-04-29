@@ -7,7 +7,7 @@ Created on Jul 30, 2024
 
 from ttboard.demoboard import DemoBoard
 
-import ttboard.logging as logging
+import ttboard.log as logging
 log = logging.getLogger(__name__)
 
 from examples.tt_um_rejunity_ay8913.ay8913 import AY8913

@@ -7,7 +7,7 @@ Created on Jul 25, 2024
 from ttboard.demoboard import DemoBoard, Pins
 
 import ttboard.util.time as time
-import ttboard.logging as logging
+import ttboard.log as logging
 log = logging.getLogger(__name__)
 
 def wait_clocks(num:int=1):

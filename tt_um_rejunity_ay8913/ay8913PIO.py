@@ -12,7 +12,7 @@ from rp2 import PIO
 
 from ttboard.demoboard import DemoBoard, Pins
 
-import ttboard.logging as logging
+import ttboard.log as logging
 log = logging.getLogger(__name__)
 
 
@@ -80,8 +80,8 @@ class AY8913PIO:
         # bidirs to the PIO state machine
         self.sm = rp2.StateMachine(0, ay8913writer, 
              freq=2000000,
-             out_base=tt.in0.raw_pin,
-             sideset_base=tt.uio0.raw_pin, in_base=tt.out0.raw_pin)
+             out_base=tt.pins.pin_ui_in0,
+             sideset_base=tt.pins.pin_uio0, in_base=tt.pins.pin_uo_out0)
         
         self.runPIO(True)
         
